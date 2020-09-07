@@ -19,7 +19,22 @@ Collection of photography shell scripts
     * Click on the [G] button in the upper-right corner of the interface to group JPG-RW2 pairs. This works nicely with images that have no corresponding RAW file
 
 ## Panoramas
-TBC
+1. Crete quick panorama to see if the images stitch well
+ * Drag and drop the series of images into `Hugin`
+ * Click on Preview panorama (OpenGL)
+ * Click on align
+ * Make manual adjustments using Move/Drag and Crop
+ * Create panorama
+ * Save as jpg
+
+2. Enhance the series of images in `Darktable`
+ * Open them in `Darktable`
+ * Correct lens distortion, even out exposure, denoise
+ * Export as TIF (16-bit)
+ 
+3. Create panorama using the TIF exports from Darktable per step 1, but export as TIF instead
+
+4. Move final TIF panorama in the parent directory. It will be enhanced in Darktable along with the other files at the end
 
 ## Stacks
 TBC
