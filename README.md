@@ -9,14 +9,16 @@ Collection of photography shell scripts
     * Move pictures from other cameras (and phones) into the aforementioned directories
       * NOTE: if the devices have mismatched time or date, use `exiftool` to correct them first
  3. Inside every directory:
-    * Sort by type and move all RAW files into a subdirectory called "RW2" (this will get slow RAW files out of the way)
+    * Sort by type and move all RAW files into a subdirectory called "RAW" (this will get slow RAW files out of the way)
     * Delete bad ones using `Space` and navigating with the arrow keys. `Option+Space` can help in comparing sharpness (`Option` zooms 100%, but deleting individual images is not possible in this mode)
       * NOTE: series of pictures to be used for panoramas or stacks are to be put into a subdirectory called `XXXX_optional_name`, where "XXXX" is the name of the first picture. That way, the directory will sort just below the outcome of the panorama, which will be stored in the parent directory. More on panoramas below. 
-    * `cd` to the "RW2" directory and execute `rawmatch.sh` to delete all RW2 files whose corresponding JPG has been deleted
-    * move remaining RW2 files from 
+    * `cd` to the "RAW" directory and execute `rawmatch.sh` to delete all RAW files whose corresponding JPG has been deleted
+    * Move remaining RAW files up one directory and delete the RAW directory
+    * Sort by name, `Command+A+Right_arrow` and put panorama RAW files into their corresponding folders. `FIXME: a script should do this`
  4. Darktable:
-    * Open the "`YYMMDD_Name_of_event`" directory in Darktable
-    * Click on the [G] button in the upper-right corner of the interface to group JPG-RW2 pairs. This works nicely with images that have no corresponding RAW file
+    * Move all panorama directories into a `panoramas` subdirectory
+    * In Darktable, Import > Folder... > Select the "`panoramas`" subdirectory > Import options > Select "`import directories recursively`" and "`Ignore JPEG files`"
+    * Click on the [G] button in the upper-right corner of the interface to group JPG-RAW pairs. This works nicely with images that have no corresponding RAW file
 
 ## Panoramas
 1. Crete quick panorama to see if the images stitch well
@@ -44,7 +46,7 @@ Convert RAW to TIF:
     
 Align series of images:
 
-    /Applications/Hugin/tools_mac/align_image_stack -m -a OUT-PREFIX ~/Pictures/YYMMDD_Location/RW2/_XXXXX/*.RW2 outaligned.jpg
+    /Applications/Hugin/tools_mac/align_image_stack -m -a OUT-PREFIX ~/Pictures/YYMMDD_Location/RAW/_XXXXX/*.RW2 outaligned.jpg
 
 Apply median stacking:
 
