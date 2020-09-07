@@ -37,4 +37,28 @@ Collection of photography shell scripts
 4. Move final TIF panorama in the parent directory. It will be enhanced in Darktable along with the other files at the end
 
 ## Stacks
-TBC
+
+Convert RAW to TIF:
+
+    mogrify -format TIF *.JPG
+    
+Align series of images:
+
+    /Applications/Hugin/tools_mac/align_image_stack -m -a OUT-PREFIX ~/Pictures/YYMMDD_Location/RW2/_XXXXX/*.RW2 outaligned.jpg
+
+Apply median stacking:
+
+    magick convert abc* -evaluate-sequence median outmedianstacked.jpg
+    
+### Debugging:
+
+Images are too different to be stacked:
+
+    After control points pruning reference images has no control
+    points Optimizing field of view in this case results in undefined
+    behaviour. Increase error distance (-t parameter), tweak cp
+    detection parameters or don't optimize HFOV.`
+
+Solution:
+
+Add `-x -y -z` and/or `-c 32`
