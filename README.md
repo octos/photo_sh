@@ -46,11 +46,12 @@ Convert RAW to TIF:
     
 Align series of images:
 
-    /Applications/Hugin/tools_mac/align_image_stack -m -a OUT-PREFIX ~/Pictures/YYMMDD_Location/RAW/_XXXXX/*.RW2 outaligned.jpg
+    cd ~/Pictures/YYMMDD_Location/RAW/_XXXXX/
+    /Applications/Hugin/tools_mac/align_image_stack -m -a OUTPREFIX -vv *.RW2
 
 Apply median stacking:
 
-    magick convert abc* -evaluate-sequence median outmedianstacked.jpg
+    magick convert OUTPREFIX* -evaluate-sequence median outmedianstacked.jpg
     
 ### Debugging:
 
