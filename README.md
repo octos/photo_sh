@@ -23,10 +23,10 @@ Collection of photography shell scripts
 ## Panoramas
 1. Create quick panorama to see if the images stitch well
    * Drag and drop the series of images into `Hugin`
-   * Click on Preview panorama (OpenGL)
-   * Click on align
+   * Click on "Preview panorama (OpenGL)" button
+   * Click on "Align"
    * Make manual adjustments using Move/Drag and Crop
-   * Create panorama
+   * Click on "Create Panorama..."
    * Save as jpg
 
 2. Enhance the series of images in `Darktable`
