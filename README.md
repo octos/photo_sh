@@ -52,11 +52,15 @@ Align series of images:
 Apply median stacking:
 
     magick convert OUTPREFIX* -evaluate-sequence median outmedianstacked.jpg
+    
+Populate EXIF (align_image_stack purges it)
+
+    exiftool -TagsFromFile P1510184.JPG -FileModifyDate outmedianstacked.jpg
 
 ## exiftool
 
 #### Transfer tag dates from one image to the other (panoramas)
-`exiftool -TagsFromFile P1510184.MP4 -FileModifyDate panorama.jpg`
+`exiftool -TagsFromFile P1510184.JPG -FileModifyDate panorama.jpg`
 https://photo.stackexchange.com/questions/89442/how-to-copy-datetaken-tag-from-another-image-using-exiftool
 
 #### Batch transfer exif tag from one file to another
