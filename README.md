@@ -20,7 +20,7 @@ Collection of photography shell scripts
     * In Darktable, Import > Folder... > Select the "`panoramas`" subdirectory > Import options > Select "`import directories recursively`" and "`Ignore JPEG files`"
     * Click on the [G] button in the upper-right corner of the interface to group JPG-RAW pairs. This works nicely with images that have no corresponding RAW file
 
-## Panoramas
+## Panoramas: Hugin
 1. Create quick panorama to see if the images stitch well
    * Drag and drop the series of images into `Hugin`
    * Click on "Preview panorama (OpenGL)" button
@@ -38,7 +38,7 @@ Collection of photography shell scripts
 
 4. Move final TIF panorama in the parent directory. It will be enhanced in Darktable along with the other files at the end
 
-## Stacks
+## Stacks: align_image_stack + Hugin
 
 Convert RAW to TIF:
 
@@ -52,8 +52,70 @@ Align series of images:
 Apply median stacking:
 
     magick convert OUTPREFIX* -evaluate-sequence median outmedianstacked.jpg
+
+## exiftool
+
+#### Transfer tag dates from one image to the other (panoramas)
+`exiftool -TagsFromFile P1510184.MP4 -FileModifyDate panorama.jpg`
+https://photo.stackexchange.com/questions/89442/how-to-copy-datetaken-tag-from-another-image-using-exiftool
+
+#### Batch transfer exif tag from one file to another
+
+`exiftool -TagsFromFile ../%f.jpg "-FileModifyDate<FileModifyDate" -ext jpg .`
+https://stackoverflow.com/questions/51353428/batch-copy-metadata-from-one-file-to-another-exiftool
+
+#### Shift AllDates (Shorthand for DateTimeOriginal, CreateDate, and ModifyDate) by 46 minutes and 8 seconds
+`exiftool "-AllDates+=0:0:0 0:46:08"`
+
+#### Display all date tags
+    exiftool -a -s -G1 -time:all .
+
+    [System]        FileModifyDate                  : 2020:05:25 10:27:02-05:00
+    [System]        FileAccessDate                  : 2020:06:03 09:32:10-05:00
+    [System]        FileInodeChangeDate             : 2020:06:03 09:32:10-05:00
+    [QuickTime]     CreateDate                      : 2020:05:25 13:31:34
+    [QuickTime]     ModifyDate                      : 2020:05:25 13:31:34
+    [Track1]        TrackCreateDate                 : 2020:05:25 11:13:10
+    [Track1]        TrackModifyDate                 : 2020:05:25 11:13:10
+    [Track1]        MediaCreateDate                 : 2020:05:25 11:13:10
+    [Track1]        MediaModifyDate                 : 2020:05:25 11:13:10
+    [Track2]        TrackCreateDate                 : 2020:05:25 11:13:10
+    [Track2]        TrackModifyDate                 : 2020:05:25 11:13:10
+    [Track2]        MediaCreateDate                 : 2020:05:25 11:13:10
+    [Track2]        MediaModifyDate                 : 2020:05:25 11:13:10
+    [IFD0]          ModifyDate                      : 0000:00:00 00:00:00
+    [ExifIFD]       DateTimeOriginal                : 2020:05:25 10:27:02
+    [ExifIFD]       CreateDate                      : 2020:05:25 10:27:02
+    [Panasonic]     TimeStamp                       : 2020:05:25 16:27:02
+    [ExifIFD]       SubSecTime                      : 651
+    [ExifIFD]       SubSecTimeOriginal              : 651
+    [ExifIFD]       SubSecTimeDigitized             : 651
+    [Composite]     SubSecCreateDate                : 2020:05:25 10:27:02.651
+    [Composite]     SubSecDateTimeOriginal          : 2020:05:25 10:27:02.651
+    [Composite]     SubSecModifyDate                : 0000:00:00 00:00:00.651
     
-### Debugging:
+#### Apply exif date to Finder's "Date Modified" date
+
+`exiftool '-DateTimeOriginal>FileModifyDate' .`
+
+#### Shifting date and time on videos
+
+That keeps the files sorted in macOS Finder, and hopefully also in other software.
+
+    exiftool "-AllDates+=0:0:0 0:46:08" *MP4
+    exiftool "-Quicktime:Time:All+=0:0:0 0:46:08" *MP4
+    exiftool "-TrackCreateDate>FileModifyDate" *MP4
+
+#### Hugin: lens data for Essential PH-1 images
+
+    Sensor: Sony IMX258 : Diagonal 5.867 mm (Type 1/3.06)
+    https://www.sony-semicon.co.jp/products/common/pdf/ProductBrief_IMX258_20151015.pdf
+
+    HFOV: 73.85?
+    Focal length: 3.4 mm
+    Focal multiplier: 43.3/5.867 = 7.38
+    
+## Debugging Hugin:
 
 Images are too different to be stacked:
 
