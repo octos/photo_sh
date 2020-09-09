@@ -40,9 +40,9 @@ Collection of photography shell scripts
 
 ## Stacks: align_image_stack + Hugin
 
-Convert RAW to TIF:
+Convert RAW to TIF (skip if stacking JPG files):
 
-    mogrify -format TIF *.JPG
+    mogrify -format TIF *.RW2
     
 Align series of images:
 
