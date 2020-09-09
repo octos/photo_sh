@@ -61,7 +61,7 @@ https://photo.stackexchange.com/questions/89442/how-to-copy-datetaken-tag-from-a
 
 #### Batch transfer exif tag from one file to another
 
-`exiftool -TagsFromFile ../%f.jpg "-FileModifyDate<FileModifyDate" -ext jpg .`
+`exiftool -TagsFromFile ../%f.jpg "-FileModifyDate<DateTimeOriginal" -ext jpg .`
 https://stackoverflow.com/questions/51353428/batch-copy-metadata-from-one-file-to-another-exiftool
 
 #### Shift AllDates (Shorthand for DateTimeOriginal, CreateDate, and ModifyDate) by 46 minutes and 8 seconds
