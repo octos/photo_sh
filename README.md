@@ -42,12 +42,12 @@ Collection of photography shell scripts
 
 Convert RAW to TIF (skip if stacking JPG files):
 
+    cd ~/Pictures/YYMMDD_Location/RAW/_XXXXX_stack/
     mogrify -format TIF *.RW2
     
 Align series of images:
 
-    cd ~/Pictures/YYMMDD_Location/RAW/_XXXXX/
-    /Applications/Hugin/tools_mac/align_image_stack -m -a OUTPREFIX -vv *.RW2
+    /Applications/Hugin/tools_mac/align_image_stack -m -a OUTPREFIX -vv *.TIF
 
 Apply median stacking:
 
